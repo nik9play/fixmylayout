@@ -87,6 +87,9 @@ textWindow.ondragstart = function() {
   return false;
 }
 
+function escapeHTML(html) {
+  return html.replace(/[&"'<>]/g, (m) => ({ "&": "&amp;", '"': "&quot;", "'": "&#39;", "<": "&lt;", ">": "&gt;" })[m])
+}
 
 function tabReceiver(request, sender, sendResponse) {
   switch (request.command) {
@@ -95,7 +98,7 @@ function tabReceiver(request, sender, sendResponse) {
       let rect = element.getBoundingClientRect();
       
       titleWindow.innerHTML = `Точность определения: ${request.accuracy * 100}%`
-      resultTextWindow.innerHTML = `${request.text}`
+      resultTextWindow.innerHTML = `${escapeHTML(request.text)}`
 
       textWindow.style.left = rect.x.toString() + "px"
       textWindow.style.top = rect.y.toString() + "px"
