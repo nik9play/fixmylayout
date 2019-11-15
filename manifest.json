@@ -1,0 +1,43 @@
+{
+  "manifest_version": 2,
+  "name": "fixmylayout",
+  "version": "1.0",
+
+  "description": "Simple wrong layout switcher.",
+
+  "icons": {
+    "48": "icons/icon.svg",
+    "96": "icons/icon.svg"
+  },
+
+  "background": {
+    "scripts": [
+      "dist/background/background.js"
+    ]
+  },
+
+  "permissions": ["contextMenus", "activeTab", "clipboardRead", "storage"],
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["dist/tab/tab.js"]
+    }
+  ],
+
+  "browser_action": {
+    "default_icon": "icons/icon_popup.svg",
+    "default_title": "fixmylayout",
+    "default_popup": "dist/popup/index.html"
+  },
+
+  "web_accessible_resources": [
+    "imgs/close.svg"
+  ],
+
+  "applications": {
+    "gecko": {
+      "id": "fixmylayout@nik9"
+    }
+  }
+}

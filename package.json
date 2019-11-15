@@ -1,0 +1,28 @@
+{
+  "name": "fixmylayout",
+  "version": "0.0.1",
+  "description": "Простой переводчик раскладки.",
+  "license": "MIT",
+  "scripts": {
+    "build": "parcel build ./src/background/tab.js --target \"tab\" && parcel build ./src/background/background.js --target \"background\" && parcel build ./src/popup/index.html --target \"popup\""
+  },
+  "dependencies": {
+    "bulma": "^0.8.0",
+    "hotkeys-js": "^3.7.2",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "parcel": "^2.0.0-alpha.2.1"
+  },
+  "targets": {
+    "popup": {
+      "publicUrl": "/dist/popup"
+    },
+    "background": {
+      "publicUrl": "/dist/background"
+    },
+    "tab": {
+      "publicUrl": "/dist/tab"
+    }
+  }
+}
