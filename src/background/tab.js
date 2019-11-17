@@ -6,13 +6,15 @@ textWindow.style.boxShadow = "rgba(0, 0, 0, 0.6) 0px 2px 8px -4px"
 textWindow.style.backgroundColor = "white"
 textWindow.style.borderRadius = "8px"
 textWindow.style.minWidth = "100px"
-textWindow.style.minHeight = "60px"
+textWindow.style.minHeight = "70px"
 textWindow.style.zIndex = "1000000"
 textWindow.style.display = "none"
 textWindow.style.padding = "10px"
 textWindow.style.justifyItems = "start"
 textWindow.style.color = "#000000"
-textWindow.style.fontFamily = "-apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Geneva, Noto Sans Armenian, Noto Sans Bengali, Noto Sans Cherokee, Noto Sans Devanagari, Noto Sans Ethiopic, Noto Sans Georgian, Noto Sans Hebrew, Noto Sans Kannada, Noto Sans Khmer, Noto Sans Lao, Noto Sans Osmanya, Noto Sans Tamil, Noto Sans Telugu, Noto Sans Thai, sans-serif"
+textWindow.style.fontFamily = "sans-serif"
+textWindow.style.boxSizing = "border-box"
+textWindow.style.lineHeight = "1.2"
 
 textWindow.style.left = "0px"
 textWindow.style.top = "0px"
@@ -27,12 +29,12 @@ closeWindow.style.top = "8px"
 closeWindow.style.cursor = "pointer"
 
 let titleWindow = document.createElement("span")
-titleWindow.style.fontSize = "0.9rem"
+titleWindow.style.fontSize = "14px"
 titleWindow.style.fontWeight = "bold"
 titleWindow.style.paddingRight = "24px"
 
 let resultTextWindow = document.createElement("span")
-resultTextWindow.style.fontSize = "0.9rem"
+resultTextWindow.style.fontSize = "14px"
 
 textWindow.appendChild(closeWindow)
 textWindow.appendChild(titleWindow)
