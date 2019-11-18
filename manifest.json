@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "fixmylayout",
-  "version": "1.2",
+  "version": "1.3",
 
   "description": "Simple wrong layout switcher.",
 
@@ -47,6 +47,15 @@
   "applications": {
     "gecko": {
       "id": "fixmylayout@nik9"
+    }
+  },
+
+  "commands": {
+    "fix_input_layout": {
+      "suggested_key": {
+        "default": "Ctrl+Alt+D"
+      },
+      "description": "Исправить раскладку в поле ввода"
     }
   }
 }

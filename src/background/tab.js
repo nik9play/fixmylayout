@@ -1,5 +1,3 @@
-import hotkeys from "hotkeys-js"
-
 let textWindow = document.createElement("div")
 textWindow.style.position = "fixed"
 textWindow.style.boxShadow = "rgba(0, 0, 0, 0.6) 0px 2px 8px -4px"
@@ -42,19 +40,6 @@ textWindow.appendChild(resultTextWindow)
 
 document.body.appendChild(textWindow)
 
-hotkeys.filter = function(event){
-  return true;
-}
-
-browser.storage.sync.get("hotkeyInput").then(d => {
-  hotkeys(d.hotkeyInput, function(event, handler){
-    event.preventDefault() 
-    let input = document.activeElement
-    console.log(input)
-    browser.runtime.sendMessage({type: "fix-input-text", text: input.value})
-  })
-})
-
 closeWindow.onclick = function() {
   textWindow.style.display = "none"
 }
@@ -94,6 +79,7 @@ function escapeHTML(html) {
 }
 
 function tabReceiver(request, sender, sendResponse) {
+  let input = document.activeElement
   switch (request.command) {
     case "fix-selected-text-layout":
       let element = window.getSelection().anchorNode.parentElement
@@ -108,8 +94,13 @@ function tabReceiver(request, sender, sendResponse) {
       break
     case "fix-input-result":
       console.log(request.text)
-      let input = document.activeElement
       input.value = request.text
+      break
+    case "get-input-text":
+      browser.runtime.sendMessage({
+        type: "send-input-text", 
+        text: input.value
+      })
       break
   }
 }

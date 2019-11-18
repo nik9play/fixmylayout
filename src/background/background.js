@@ -41,7 +41,7 @@ browser.contextMenus.onClicked.addListener(function(info, tab) {
 
 function mainReciever(request, sender, sendResponce) {
   switch (request.type) {
-    case "fix-input-text":
+    case "send-input-text":
       converter.text = request.text
       converter.convert()
       text = converter.text
@@ -62,16 +62,24 @@ function mainReciever(request, sender, sendResponce) {
 browser.runtime.onMessage.addListener(mainReciever)
 
 browser.storage.sync.get().then(d => {
-  if (typeof d.hotkeyInput == "undefined") {
-    browser.storage.sync.set({
-      hotkeyInput: "ctrl+alt+d"
-    })
-    loadSettings()
-  }
   if (typeof d.pasteFromClipboard == "undefined") {
     browser.storage.sync.set({
       pasteFromClipboard: true
     })
     loadSettings()
+  }
+})
+
+browser.commands.onCommand.addListener(function(command) {
+  if (command == "fix_input_layout") {
+    let querying = browser.tabs.query({
+      active: true,
+      currentWindow: true
+    });
+    querying.then(function(tabs) {
+      browser.tabs.sendMessage(tabs[0].id, {
+        command: "get-input-text"
+      })
+    })
   }
 })
