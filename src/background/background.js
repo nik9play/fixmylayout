@@ -66,7 +66,6 @@ browser.storage.sync.get().then(d => {
     browser.storage.sync.set({
       pasteFromClipboard: true
     })
-    loadSettings()
   }
 })
 

@@ -14,6 +14,8 @@ function fixLayout() {
 let fixLayoutBtn = document.getElementById("fixLayoutBtn")
 fixLayoutBtn.onclick = fixLayout
 
+let pasteFromClipboard = document.getElementById("paste-from-clipboard")
+
 function saveSettings() {
   browser.storage.sync.set({
     pasteFromClipboard: pasteFromClipboard.checked
