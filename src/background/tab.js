@@ -94,12 +94,26 @@ function tabReceiver(request, sender, sendResponse) {
       break
     case "fix-input-result":
       console.log(request.text)
-      input.value = request.text
+      switch(input.classList[0]) {
+        case "im_editable":
+          input.innerText = request.text
+          break
+        default:
+          input.value = request.text
+      }
       break
     case "get-input-text":
+      let value
+      switch(input.classList[0]) {
+        case "im_editable":
+          value = input.innerText
+          break
+        default:
+          value = input.value
+      }
       browser.runtime.sendMessage({
         type: "send-input-text", 
-        text: input.value
+        text: value
       })
       break
   }
