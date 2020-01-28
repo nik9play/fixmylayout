@@ -7,12 +7,14 @@ textWindow.style.minWidth = "100px"
 textWindow.style.minHeight = "70px"
 textWindow.style.zIndex = "1000000"
 textWindow.style.display = "none"
-textWindow.style.padding = "10px"
-textWindow.style.justifyItems = "start"
+textWindow.style.padding = "26px 10px 10px"
 textWindow.style.color = "#000000"
 textWindow.style.fontFamily = "sans-serif"
 textWindow.style.boxSizing = "border-box"
 textWindow.style.lineHeight = "1.2"
+textWindow.style.maxHeight = "50vh"
+textWindow.style.maxWidth = "50vw"
+textWindow.style.minWidth = "300px"
 
 textWindow.style.left = "0px"
 textWindow.style.top = "0px"
@@ -30,9 +32,14 @@ let titleWindow = document.createElement("span")
 titleWindow.style.fontSize = "14px"
 titleWindow.style.fontWeight = "bold"
 titleWindow.style.paddingRight = "24px"
+titleWindow.style.left = "8px"
+titleWindow.style.top = "8px"
+titleWindow.style.position = "absolute"
+titleWindow.style.cursor = "move"
 
 let resultTextWindow = document.createElement("span")
 resultTextWindow.style.fontSize = "14px"
+resultTextWindow.style.overflow = "auto"
 
 textWindow.appendChild(closeWindow)
 textWindow.appendChild(titleWindow)
@@ -44,7 +51,7 @@ closeWindow.onclick = function() {
   textWindow.style.display = "none"
 }
 
-textWindow.onmousedown = function(event) {
+titleWindow.onmousedown = function(event) {
   event.preventDefault();
   textWindow.style.opacity = "0.8"
 
@@ -63,19 +70,15 @@ textWindow.onmousedown = function(event) {
 
   document.addEventListener('mousemove', onMouseMove);
 
-  textWindow.onmouseup = function() {
+  titleWindow.onmouseup = function() {
     textWindow.style.opacity = "1"
-    document.removeEventListener('mousemove', onMouseMove);
-    textWindow.onmouseup = null;
+    document.removeEventListener('mousemove', onMouseMove)
+    document.onMouseMove = null
   }
 }
 
 textWindow.ondragstart = function() {
   return false;
-}
-
-function escapeHTML(html) {
-  return html.replace(/[&"'<>]/g, (m) => ({ "&": "&amp;", '"': "&quot;", "'": "&#39;", "<": "&lt;", ">": "&gt;" })[m])
 }
 
 function tabReceiver(request, sender, sendResponse) {
@@ -85,12 +88,12 @@ function tabReceiver(request, sender, sendResponse) {
       let element = window.getSelection().anchorNode.parentElement
       let rect = element.getBoundingClientRect();
       
-      titleWindow.innerHTML = `Точность определения: ${request.accuracy * 100}%`
-      resultTextWindow.innerHTML = `${escapeHTML(request.text)}`
+      titleWindow.innerText = `Точность определения: ${request.accuracy * 100}%`
+      resultTextWindow.innerText = `${request.text}`
 
       textWindow.style.left = rect.x.toString() + "px"
       textWindow.style.top = rect.y.toString() + "px"
-      textWindow.style.display = "inline-grid"
+      textWindow.style.display = "flex"
       break
     case "fix-input-result":
       console.log(request.text)
