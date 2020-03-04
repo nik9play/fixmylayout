@@ -3,10 +3,24 @@ import converter from "./converter"
 // converter.text = "Pflfxf jhufybpfwbb? d jcj,tyyjcnb ;t yfxfkj gjdctlytdyjq hf,jns gj ajhvbhjdfyb. gjpbwbb gjpdjkztn jwtybnm pyfxtybt lfkmytqib[ yfghfdktybq hfpdbnbz/ C lheujq cnjhjys htfkbpfwbz yfvtxtyys[ gkfyjds[ pflfybq gjpdjkztn jwtybnm pyfxtybt ceotcndtyys[ abyfycjds[ b flvbybcnhfnbdys[ eckjdbq/ Hfdysv j,hfpjv hfvrb b vtcnj j,extybz rflhjd d pyfxbntkmyjq cntgtyb j,eckfdkbdftn cjplfybt cjjndtncnde.obq eckjdbq frnbdbpfwbb/ Hfdysv j,hfpjv hfvrb b vtcnj j,extybz rflhjd ghtlcnfdkztn cj,jq bynthtcysq 'rcgthbvtyn ghjdthrb cbcntvs j,extybz rflhjd? cjjndtncndetn yfceoysv gjnht,yjcnzv/ C lheujq cnjhjys htfkbpfwbz yfvtxtyys[ gkfyjds[ pflfybq nht,e.n jn yfc fyfkbpf cbcntv vfccjdjuj exfcnbz/ "
 // console.log(converter.convert())
 
-browser.contextMenus.create({
-  id: "fix-layout",
-  title: "Перевести раскладку",
-  contexts: ["selection"]
+browser.storage.sync.get().then(d => {
+  if (typeof d.pasteFromClipboard == "undefined" || typeof d.contextMenuBtn == "undefined") {
+    browser.storage.sync.set({
+      pasteFromClipboard: true,
+      contextMenuBtn: true
+    })
+  }
+})
+
+
+browser.storage.sync.get("contextMenuBtn").then(d => {
+  if (d.contextMenuBtn) {
+    browser.contextMenus.create({
+      id: "fix-layout",
+      title: "Перевести раскладку",
+      contexts: ["selection"]
+    })
+  }
 })
 
 let text

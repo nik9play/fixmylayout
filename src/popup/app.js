@@ -15,26 +15,19 @@ let fixLayoutBtn = document.getElementById("fixLayoutBtn")
 fixLayoutBtn.onclick = fixLayout
 
 let pasteFromClipboard = document.getElementById("paste-from-clipboard")
+let contextMenuBtn = document.getElementById("context-menu-btn")
 
 function saveSettings() {
   browser.storage.sync.set({
-    pasteFromClipboard: pasteFromClipboard.checked
+    pasteFromClipboard: pasteFromClipboard.checked,
+    contextMenuBtn: contextMenuBtn.checked
   })
 }
 
 pasteFromClipboard.onchange = saveSettings
+contextMenuBtn.onchange = saveSettings
 
-function loadSettings() {
-  browser.storage.sync.get().then(d => {
-    if (typeof d.pasteFromClipboard == "undefined") {
-      browser.storage.sync.set({
-        pasteFromClipboard: true
-      })
-      loadSettings()
-    } else {
-      pasteFromClipboard.checked = d.pasteFromClipboard
-    }
-  })
-}
-
-loadSettings()
+browser.storage.sync.get().then(d => {
+  pasteFromClipboard.checked = d.pasteFromClipboard
+  contextMenuBtn.checked = d.contextMenuBtn
+})
