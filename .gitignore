@@ -1,6 +1,5 @@
 node_modules
 dist
-yarn.lock
 .parcel-cache
 fixmylayout-dist.zip
 fixmylayout-src.zip
