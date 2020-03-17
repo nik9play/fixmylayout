@@ -68,7 +68,7 @@ export default {
       let ruChars = Object.values(ruPC.chars)
 
       chars.forEach((char, index) => {
-        charIndex = ruChars.indexOf(char)
+        let charIndex = ruChars.indexOf(char)
 
         if (charIndex != -1) {
           chars[index] = enChars[charIndex]
@@ -86,7 +86,7 @@ export default {
       let ruChars = Object.values(ruPC.chars)
 
       chars.forEach((char, index) => {
-        charIndex = enChars.indexOf(char)
+        let charIndex = enChars.indexOf(char)
 
         if (charIndex != -1) {
           chars[index] = ruChars[charIndex]

@@ -14,7 +14,7 @@
 
   "background": {
     "scripts": [
-      "dist/background/background.js"
+      "dist/background.js"
     ]
   },
 
@@ -23,14 +23,14 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["dist/tab/tab.js"]
+      "js": ["dist/tab.js"]
     }
   ],
 
   "browser_action": {
     "default_icon": "icons/icon_small_dark.svg",
     "default_title": "fixmylayout",
-    "default_popup": "dist/popup/index.html",
+    "default_popup": "dist/index.html",
     "theme_icons": [
       {
         "light": "icons/icon_small_light.svg",
