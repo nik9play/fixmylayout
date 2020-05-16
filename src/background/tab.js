@@ -81,6 +81,16 @@ textWindow.ondragstart = function() {
   return false;
 }
 
+function setCaretContentEditable(el, pos) {
+  let range = document.createRange()
+  let sel = window.getSelection()
+  range.setStart(el.childNodes[0], pos)
+  range.collapse(true)
+  sel.removeAllRanges()
+  sel.addRange(range)
+  el.focus()
+}
+
 function tabReceiver(request, sender, sendResponse) {
   let input = document.activeElement
   switch (request.command) {
@@ -100,6 +110,7 @@ function tabReceiver(request, sender, sendResponse) {
       switch(input.classList[0]) {
         case "im_editable":
           input.innerText = request.text
+          setCaretContentEditable(input, input.innerText.length)
           break
         default:
           input.value = request.text
