@@ -1,5 +1,7 @@
 node_modules
-dist
+dist/background.js
+dist/popup.js
+dist/tab.js
 .parcel-cache
 fixmylayout-dist.zip
 fixmylayout-src.zip
