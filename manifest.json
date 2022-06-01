@@ -53,7 +53,7 @@
   "commands": {
     "fix_input_layout": {
       "suggested_key": {
-        "default": "Ctrl+Shift+V"
+        "default": "Shift+Alt+V"
       },
       "description": "Исправить раскладку в поле ввода"
     }
