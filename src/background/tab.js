@@ -20,7 +20,7 @@ textWindow.style.left = "0px"
 textWindow.style.top = "0px"
 
 let closeWindow = document.createElement("img")
-closeWindow.setAttribute("src", browser.extension.getURL("imgs/close.svg"))
+closeWindow.setAttribute("src", browser.runtime.getURL("imgs/close.svg"))
 closeWindow.style.width = "16px"
 closeWindow.style.height = "16px"
 closeWindow.style.position = "absolute"
