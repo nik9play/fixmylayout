@@ -78,7 +78,7 @@ titleWindow.onmousedown = function(event) {
 }
 
 textWindow.ondragstart = function() {
-  return false;
+  return false
 }
 
 function setCaretContentEditable(el, pos) {
@@ -89,6 +89,18 @@ function setCaretContentEditable(el, pos) {
   sel.removeAllRanges()
   sel.addRange(range)
   el.focus()
+}
+
+function isTextBox(element) {
+  const tagName = element.tagName.toLowerCase()
+
+  if (tagName === 'textarea') return true
+  if (tagName !== 'input') return false
+
+  const type = element.getAttribute('type').toLowerCase()
+  const inputTypes = ['text', 'password', 'email', 'url', 'search']
+
+  return inputTypes.includes(type)
 }
 
 function tabReceiver(request, sender, sendResponse) {
@@ -106,25 +118,33 @@ function tabReceiver(request, sender, sendResponse) {
       textWindow.style.display = "flex"
       break
     case "fix-input-result":
-      console.log(request.text)
-      switch(input.classList[0]) {
-        case "im_editable":
-          input.innerText = request.text
-          setCaretContentEditable(input, input.innerText.length)
+      if (!isTextBox(input)) {
+        if (!input.isContentEditable)
           break
-        default:
-          input.value = request.text
       }
+
+      if (input.isContentEditable) {
+        input.innerText = request.text
+        setCaretContentEditable(input, input.innerText.length)
+      } else {
+        input.value = request.text
+      }
+
       break
     case "get-input-text":
-      let value
-      switch(input.classList[0]) {
-        case "im_editable":
-          value = input.innerText
+      if (!isTextBox(input)) {
+        if (!input.isContentEditable)
           break
-        default:
-          value = input.value
       }
+
+      let value
+
+      if (input.isContentEditable) {
+        value = input.innerText
+      } else {
+        value = input.value
+      }
+
       browser.runtime.sendMessage({
         type: "send-input-text", 
         text: value
